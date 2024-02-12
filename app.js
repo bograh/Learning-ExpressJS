@@ -32,6 +32,19 @@ app.post('/todos', (req, res) => {
     res.status(201).json(todo);
 });
 
+// Update todo
+app.put('/todos/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const todoIndex = todos.findIndex(todo => todo.id === id);
+
+    if (todoIndex === -1) {
+        res.status(404).json({ message: "Todo not fouund" });
+    } else {
+        todos[todoIndex] = { ...todos[todoIndex], ...req.body };
+        res.json(todos[todoIndex]);
+    }
+});
+
 app.get('/', (req, res) => {
     res.send('Welcome to express');
 });
