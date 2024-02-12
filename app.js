@@ -12,6 +12,14 @@ app.get('/todos', (req, res) => {
     res.json(todos);
 });
 
+// Create todo
+app.post('/todos', (req, res) => {
+    const todo = req.body;
+    todo.id = todos.length + 1;
+    todos.push(todo);
+    res.status(201).json(todo);
+});
+
 app.get('/', (req, res) => {
     res.send('Welcome to express');
 });
