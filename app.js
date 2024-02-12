@@ -1,15 +1,20 @@
-const express = require('express')
-const app = express()
-const PORT = 3000
+const express = require('express');
+
+const app = express();
+const PORT = 3000;
+
+let todos = [];
+
+// Get all todos
+app.get('/todos', (req, res) => {
+    res.send(todos);
+});
+
 
 app.get('/', (req, res) => {
-    res.send('Welcome to Express App')
-})
-
-app.get('/hello', (req, res) => {
-    res.send('This is the hello endpoint')
-})
+    res.send('Welcome to express');
+});
 
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`)
-})
+    console.log(`Server running at http://localhost:${PORT}`);
+});
