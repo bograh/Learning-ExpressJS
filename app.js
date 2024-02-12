@@ -9,9 +9,8 @@ let todos = [];
 
 // Get all todos
 app.get('/todos', (req, res) => {
-    res.send(todos);
+    res.json(todos);
 });
-
 
 app.get('/', (req, res) => {
     res.send('Welcome to express');
