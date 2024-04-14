@@ -7,6 +7,7 @@ const PORT = 3000;
 const filename = "todos.json";
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 let todos = [];
 
@@ -35,6 +36,11 @@ fs.readFile(filename, 'utf8', (err, data) => {
     }
 });
 
+// Serve the HTML form
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
 // Get all todos
 app.get('/todos', (req, res) => {
     res.json(todos);
@@ -54,8 +60,12 @@ app.get('/todos/:id', (req, res) => {
 
 // Create todo
 app.post('/todos', (req, res) => {
-    const todo = req.body;
-    todo.id = todos.length + 1;
+    const todo = {
+        title: req.body.todo,
+        description: req.body.description,
+        id: todos.length + 1
+    };
+    
     todos.push(todo);
 
     // Write todos to file
@@ -64,7 +74,7 @@ app.post('/todos', (req, res) => {
         console.log('Data written to file');
     });
 
-    res.status(201).json(todo);
+    res.redirect('/todos');
 });
 
 // Update todo
@@ -87,7 +97,7 @@ app.put('/todos/:id', (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
+app.get('/welcome', (req, res) => {
     res.send('Welcome to express');
 });
 
