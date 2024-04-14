@@ -61,7 +61,7 @@ app.get('/todos/:id', (req, res) => {
 // Create todo
 app.post('/todos', (req, res) => {
     const todo = {
-        title: req.body.todo,
+        title: req.body.title,
         description: req.body.description,
         id: todos.length + 1
     };
