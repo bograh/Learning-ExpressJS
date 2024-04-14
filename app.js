@@ -15,7 +15,7 @@ fs.readFile(filename, 'utf8', (err, data) => {
         if (err.code === 'ENOENT') {
             fs.open(filename, 'w', function (err, file) {
               if (err) throw err;
-              console.log('File Created!');
+              console.log('File Created!!');
             });
         } else {
             throw err;
@@ -92,5 +92,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log("Server running...");
+    console.log("Server started...");
 });
